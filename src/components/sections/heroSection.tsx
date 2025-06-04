@@ -1,126 +1,117 @@
 "use client";
-import { Calendar, Clock } from "lucide-react";
-import Container from "../layoyt/container";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Badge } from "../ui/badge";
+import { Clock, MapPin, Search } from "lucide-react";
+
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import PrayerTimes from "../timings";
 
 export default function HeroSection() {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [location, setLocation] = useState("");
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const prayerTimes = [
-    { name: "Fajr", time: "5:30 AM", status: "completed" },
-    { name: "Dhuhr", time: "12:45 PM", status: "completed" },
-    { name: "Asr", time: "4:20 PM", status: "current" },
-    { name: "Maghrib", time: "6:55 PM", status: "upcoming" },
-    { name: "Isha", time: "8:30 PM", status: "upcoming" },
-  ];
-
-  const nextPrayer = prayerTimes.find(
-    (prayer) => prayer.status === "current" || prayer.status === "upcoming"
-  );
   return (
-    <section className="w-full min-h-screen my-background">
-      <Container className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
-        {/* left */}
-        <div className="w-full">
-          <h1 className="text-4xl md:text-6xl font-bold text-left text-coffee-100">
-            Guiding you to the <br /> nearest place of prayer.
-          </h1>
-        </div>
-        {/* right */}
-        <div className="w-full">
-          <Card className="bg-[#093028]/40 border-[#093028] backdrop-blur-sm shadow-lg">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                </div>
-                <Badge
-                  variant="secondary"
-                  className="bg-green-600/20 text-green-400 border-green-600/30"
-                >
-                  <Clock className="w-3 h-3 mr-1" />
-                  Live
-                </Badge>
+    <section className="pt-20 pb-10 min-h-screen bg-gradient-to-b from-emerald-800 to-emerald-600 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/cover.jpg')] opacity-5"></div>
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 pt-16 md:pt-24">
+          <motion.div
+            className="md:w-1/2 text-white"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h1
+              className="text-4xl md:text-6xl font-bold leading-tight mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Guiding you to the nearest &nbsp;
+              <span className="text-yellow-300">place of prayer.</span>
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl mb-8 text-emerald-100"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Discover prayer times, facilities, and directions to mosques in
+              your area.
+            </motion.p>
+
+            <motion.div
+              className="bg-white p-2 rounded-xl shadow-neomorphic flex items-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="flex-1 flex items-center gap-2 px-4">
+                <MapPin className="text-emerald-600 h-5 w-5" />
+                <input
+                  type="text"
+                  placeholder="Enter your location"
+                  className="w-full py-3 focus:outline-none text-gray-700"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                />
               </div>
-              <div className="flex items-center justify-between mt-4">
-                <div>
-                  <h3 className="text-white font-semibold">
-                    Today's Prayer Times
-                  </h3>
-                  <p className="text-gray-400 text-sm flex items-center mt-1">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    {currentTime.toLocaleDateString("en-US", {
-                      weekday: "long",
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-gray-400 text-sm">Current Time</p>
-                  <p className="text-white font-mono text-lg">
-                    {currentTime.toLocaleTimeString("en-US", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: true,
-                    })}
-                  </p>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {prayerTimes.map((prayer, index) => (
-                <div
-                  key={prayer.name}
-                  className="flex items-center justify-between p-3 rounded-lg bg-main/30"
+              <motion.button
+                className="bg-emerald-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-emerald-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Search className="h-5 w-5" />
+                Search
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              className="flex gap-4 flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              {[
+                "Find Prayer Times",
+                "Get Directions",
+                "Explore Facilities",
+              ].map((text, index) => (
+                <motion.span
+                  key={text}
+                  className="inline-flex items-center gap-1.5 bg-emerald-700/50 px-4 py-2 rounded-full text-emerald-50"
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "rgba(16, 185, 129, 0.7)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <div className="flex items-center space-x-3">
-                    <div
-                      className={`w-2 h-2 rounded-full ${
-                        prayer.status === "completed"
-                          ? "bg-green-500"
-                          : prayer.status === "current"
-                          ? "bg-yellow-500"
-                          : "bg-gray-500"
-                      }`}
-                    ></div>
-                    <span className="text-white font-medium">
-                      {prayer.name}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-300 font-mono">
-                      {prayer.time}
-                    </span>
-                    {prayer.status === "current" && (
-                      <Badge className="bg-yellow-600/20 text-yellow-400 border-yellow-600/30 text-xs">
-                        Next
-                      </Badge>
-                    )}
-                    {prayer.status === "completed" && (
-                      <div className="w-4 h-4 bg-green-600 rounded-full flex items-center justify-center">
-                        <span className="text-white text-xs">✓</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  <Clock className="h-4 w-4" />
+                  {text}
+                </motion.span>
               ))}
-            </CardContent>
-          </Card>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            className="w-full md:w-1/2"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <PrayerTimes />
+          </motion.div>
         </div>
-      </Container>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 160">
+          <path
+            fill="#f9fafb"
+            fillOpacity="1"
+            d="M0,128L80,133.3C160,139,320,149,480,144C640,139,800,117,960,101.3C1120,85,1280,75,1360,69.3L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+          ></path>
+        </svg>
+      </div>
     </section>
   );
 }

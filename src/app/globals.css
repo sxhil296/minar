@@ -135,18 +135,4 @@
   }
 }
 
-.my-background {
-  background: #093028;
-  background: -webkit-linear-gradient(
-    to right,
 
-    #093028,
-    #237a57
-  );
-  background: linear-gradient(
-    to right,
-
-    #093028,
-    #237a57
-  );
-}
