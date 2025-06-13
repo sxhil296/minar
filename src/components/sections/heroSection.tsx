@@ -64,32 +64,6 @@ export default function HeroSection() {
                 Search
               </motion.button>
             </motion.div>
-
-            <motion.div
-              className="flex gap-4 flex-wrap"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              {[
-                "Find Prayer Times",
-                "Get Directions",
-                "Explore Facilities",
-              ].map((text, index) => (
-                <motion.span
-                  key={text}
-                  className="inline-flex items-center gap-1.5 bg-emerald-700/50 px-4 py-2 rounded-full text-emerald-50"
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "rgba(16, 185, 129, 0.7)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Clock className="h-4 w-4" />
-                  {text}
-                </motion.span>
-              ))}
-            </motion.div>
           </motion.div>
 
           <motion.div
