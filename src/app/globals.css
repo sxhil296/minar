@@ -4,13 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-main: #237a57;
-  --color-green: #1a4d3e;
-  --color-wild-green: #3e4031;
   --color-coffee-100: #d9caad;
-  --color-coffee-200: #bfa07a;
-  --color-coffee-300: #a67538;
-  --color-coffee-400: #402019;
   --color-black: #000000;
   --color-charcoal: #161616;
   --color-gray: #98928b;
@@ -134,5 +128,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-

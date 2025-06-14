@@ -38,7 +38,11 @@ interface DateType {
   };
 }
 
-const PrayerTimes: React.FC = () => {
+interface PrayerTimesProps {
+  city: string;
+}
+
+const PrayerTimes = ({ city }: PrayerTimesProps) => {
   const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
   const [nextPrayer, setNextPrayer] = useState<PrayerTime | null>(null);
   const [timeToNext, setTimeToNext] = useState<string>("");
@@ -70,7 +74,7 @@ const PrayerTimes: React.FC = () => {
           "https://api.aladhan.com/v1/timingsByCity",
           {
             params: {
-              city: "New Delhi",
+              city: city || "New Delhi",
               country: "India",
               method: 4,
             },
@@ -117,10 +121,12 @@ const PrayerTimes: React.FC = () => {
       if (nextPrayer) {
         setTimeToNext(calculateTimeToNext(nextPrayer.time));
       }
-    }, 60000);
+    });
 
     return () => clearInterval(interval);
-  }, [nextPrayer]);
+  }, [city]);
+
+  console.log("city", city);
 
   if (loading) {
     return (
@@ -136,12 +142,12 @@ const PrayerTimes: React.FC = () => {
   }
 
   return (
-    <div className="w-full max-w-md lg:max-w-lg mx-auto relative">
+    <div className="w-full max-w-md lg:max-w-lg mx-auto  relative">
       <motion.div
         initial={{ opacity: 0, x: -30, y: -10 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-        className="absolute -top-16 -right-2 lg:-right-16 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-2xl rounded-2xl border border-white/40 px-5 py-3 shadow-2xl z-20 min-w-[140px] lg:min-w-[180px]"
+        className="absolute -top-10 -right-2 lg:-right-12 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-2xl rounded-2xl border border-white/40 px-5 py-3 shadow-2xl z-20 min-w-[140px] lg:min-w-[180px]"
         whileHover={{ scale: 1.05, y: -5 }}
       >
         <div className="space-y-2">
@@ -200,7 +206,7 @@ const PrayerTimes: React.FC = () => {
                 Prayer Times
               </h2>
               <p className="text-white/80 text-sm lg:text-base font-medium">
-                New Delhi, India
+                {city}, India
               </p>
             </div>
           </motion.div>
