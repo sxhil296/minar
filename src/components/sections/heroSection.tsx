@@ -23,8 +23,8 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className=" pb-10 min-h-[100vh] bg-gradient-to-b from-emerald-800 to-emerald-600 relative overflow-hidden">
-      <Header />
+    <section className=" pb-10 min-h-[90vh] bg-gradient-to-b from-emerald-800 to-emerald-600 relative overflow-hidden">
+     
       <div className="absolute inset-0 bg-[url('/cover.jpg')] opacity-5"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 pt-16 md:pt-24">
@@ -59,11 +59,10 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              whileHover={{ scale: 1.02 }}
             >
               <div className="flex-1 flex items-center gap-2 px-4">
                 <MapPin className="text-emerald-600 h-5 w-5" />
-                <input type="text" placeholder="Search masjids by location" />
+                <input type="text" placeholder="Search masjids by location" className="w-full h-full outline-none placeholder:text-gray-400 text-emerald-800" />
               </div>
               <motion.button
                 className="bg-emerald-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-emerald-700 transition-colors"
