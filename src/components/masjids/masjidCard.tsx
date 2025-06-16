@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Eye, Navigation, Users } from "lucide-react";
+import { MapPin, Eye, Navigation, Users, Flower2 } from "lucide-react";
 
 interface MasjidData {
   name: string;
@@ -24,7 +24,7 @@ export default function MasjidCard({
   };
 
   return (
-    <div className="relative w-full h-full bg-coffee-100/30 backdrop-blur-lg rounded-2xl border border-white/20 hover:border-emerald-800 shadow-2xl overflow-hidden">
+    <div className="relative w-full h-full bg-coffee-100/30 backdrop-blur-lg rounded-2xl border border-white/20 hover:border-emerald-800 shadow-xl overflow-hidden">
       {/* Masjid Image */}
       <div className="relative h-48 overflow-hidden">
         <img
@@ -41,20 +41,34 @@ export default function MasjidCard({
       </div>
 
       {/* Content Section */}
-      <div className="p-5 flex flex-col justify-between h-48">
+      <div className="p-4 flex flex-col justify-between h-52">
         <div>
           <h2 className="text-xl font-bold text-black mb-2 leading-tight">
             {name}
           </h2>
 
-          <div className="flex items-start gap-2 mb-2">
+          <div className="flex items-start gap-2 mb-1">
             <MapPin className="w-4 h-4 text-black/70 mt-0.5 flex-shrink-0" />
             <p className="text-black/80 text-sm leading-relaxed">{address}</p>
           </div>
-
-          <div className="flex items-start gap-2 mb-2">
+           <div className="flex items-start gap-2 mb-1">
             <Users className="w-4 h-4 text-black/70 mt-0.5 flex-shrink-0" />
-            <p className="text-black/80 text-sm leading-relaxed">500 capacity</p>
+            <p className="text-black/80 text-sm leading-relaxed">
+              Jummah prayers at 1:30 PM
+            </p>
+          </div>
+
+          <div className="flex items-start gap-2 mb-1">
+            <Users className="w-4 h-4 text-black/70 mt-0.5 flex-shrink-0" />
+            <p className="text-black/80 text-sm leading-relaxed">
+              500 capacity
+            </p>
+          </div>
+          <div className="flex items-start gap-2 mb-1">
+            <Flower2 className="w-4 h-4 text-black/70 mt-0.5 flex-shrink-0" />
+            <p className="text-black/80 text-sm leading-relaxed">
+              Women's Section
+            </p>
           </div>
         </div>
 

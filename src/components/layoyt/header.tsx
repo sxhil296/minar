@@ -9,8 +9,11 @@ export default function Header() {
         <Link href="/" className="text-yellow-300 text-3xl font-bold">
           Minar
         </Link>
-        <Button className="bg-yellow-300 text-black hover:bg-yellow-300/90">
-          Add Masjid
+        <Button
+          className="bg-yellow-300 text-black hover:bg-yellow-300/90"
+          asChild
+        >
+          <Link href="/add-masjid">Add Masjid</Link>
         </Button>
       </div>
     </header>
