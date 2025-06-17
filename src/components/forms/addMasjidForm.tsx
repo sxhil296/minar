@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Upload, X, Clock, MapPin, Phone, Camera } from "lucide-react";
+import InputField from "./inputField";
 
 export default function AddMasjidForm() {
   const [images, setImages] = useState<File[]>([]);
@@ -64,9 +65,11 @@ export default function AddMasjidForm() {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-8 text-emerald-800">
+    <div className="max-w-6xl w-full mx-auto p-6 space-y-8 text-emerald-800">
       <div className="space-y-2">
-        <h1 className="text-2xl sm:text-3xl font-bold leading-none">Add New Masjid</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold leading-none">
+          Add New Masjid
+        </h1>
         <p className="text-muted-foreground">
           Fill in the details to add a new masjid to our directory
         </p>
@@ -74,7 +77,7 @@ export default function AddMasjidForm() {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basic Information */}
-        <Card>
+        <Card className="rounded">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MapPin className="h-5 w-5" />
@@ -82,51 +85,43 @@ export default function AddMasjidForm() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Masjid Name *</Label>
-              <Input
-                id="name"
-                placeholder="Enter masjid name"
-                value={formData.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-                required
-              />
-            </div>
+            <InputField
+              label="Masjid Name"
+              isRequired={true}
+              id="name"
+              name="name"
+              placeholder="Enter masjid name"
+              value={formData.name}
+              onChange={(e) => handleInputChange("name", e.target.value)}
+            />
 
-            <div className="space-y-2">
-              <Label htmlFor="address">Address *</Label>
-              <Textarea
-                id="address"
-                placeholder="Enter complete address"
-                value={formData.address}
-                onChange={(e) => handleInputChange("address", e.target.value)}
-                className="min-h-[80px]"
-                required
-              />
-            </div>
+            <InputField
+              label="Address"
+              isRequired={true}
+              id="address"
+              name="address"
+              placeholder="Enter complete address"
+              value={formData.address}
+              onChange={(e) => handleInputChange("address", e.target.value)}
+            />
 
-            <div className="space-y-2">
-              <Label htmlFor="contact">Contact Number *</Label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="contact"
-                  type="tel"
-                  placeholder="+1 (555) 123-4567"
-                  value={formData.contactNumber}
-                  onChange={(e) =>
-                    handleInputChange("contactNumber", e.target.value)
-                  }
-                  className="pl-10"
-                  required
-                />
-              </div>
-            </div>
+            <InputField
+              label="Contact Number"
+              isRequired={true}
+              id="contact"
+              name="contact"
+              placeholder="+91 7070707070"
+              value={formData.contactNumber}
+              onChange={(e) =>
+                handleInputChange("contactNumber", e.target.value)
+              }
+              type="tel"
+            />
           </CardContent>
         </Card>
 
         {/* Prayer Timings */}
-        <Card>
+        <Card className="rounded">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Clock className="h-5 w-5" />
@@ -136,32 +131,32 @@ export default function AddMasjidForm() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {Object.entries(formData.prayerTimings).map(([prayer, time]) => (
-                <div key={prayer} className="space-y-2">
-                  <Label htmlFor={prayer} className="capitalize">
-                    {prayer}
-                  </Label>
-                  <Input
-                    id={prayer}
-                    type="time"
-                    value={time}
-                    onChange={(e) =>
-                      handlePrayerTimeChange(prayer, e.target.value)
-                    }
-                  />
-                </div>
+                <InputField
+                  key={prayer}
+                  label={prayer.charAt(0).toUpperCase() + prayer.slice(1)}
+                  isRequired={true}
+                  id={prayer}
+                  name={prayer}
+                  type="time"
+                  value={time}
+                  onChange={(e) =>
+                    handlePrayerTimeChange(prayer, e.target.value)
+                  }
+                  placeholder={`Enter ${prayer} time`}
+                />
               ))}
             </div>
           </CardContent>
         </Card>
 
         {/* Additional Details */}
-        <Card>
+        <Card className="rounded">
           <CardHeader>
             <CardTitle>Additional Details</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-3">
-              <Label>Women Section</Label>
+              <Label className="text-emerald-800">Women Section</Label>
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="women-section"
@@ -169,6 +164,7 @@ export default function AddMasjidForm() {
                   onCheckedChange={(checked) =>
                     handleInputChange("womenSection", checked as boolean)
                   }
+                  className="accent-emerald-600 rounded w-5 h-5"
                 />
                 <Label htmlFor="women-section" className="text-sm font-normal">
                   This masjid has a dedicated women's section
@@ -177,7 +173,7 @@ export default function AddMasjidForm() {
             </div>
 
             <div className="space-y-3">
-              <Label>Denomination</Label>
+              <Label className="text-emerald-800">Denomination</Label>
               <RadioGroup
                 value={formData.denomination}
                 onValueChange={(value) =>
@@ -185,7 +181,7 @@ export default function AddMasjidForm() {
                 }
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="sunni" id="sunni" />
+                  <RadioGroupItem value="sunni" id="sunni" className="accent:emerald-800" />
                   <Label htmlFor="sunni">Sunni</Label>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -198,7 +194,7 @@ export default function AddMasjidForm() {
         </Card>
 
         {/* Images */}
-        <Card>
+        <Card className="rounded">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Camera className="h-5 w-5" />
@@ -220,7 +216,7 @@ export default function AddMasjidForm() {
                     type="button"
                     variant="destructive"
                     size="sm"
-                    className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0  transition-opacity"
                     onClick={() => removeImage(index)}
                   >
                     <X className="h-3 w-3" />
@@ -259,11 +255,11 @@ export default function AddMasjidForm() {
         </Card>
 
         {/* Submit Button */}
-        <div className="flex justify-end space-x-4">
-          <Button type="button" variant="outline">
+        <div className="flex justify-start space-x-4">
+          <Button type="button" variant="outline" className="rounded px-8 cursor-pointer  text-gray-800">
             Cancel
           </Button>
-          <Button type="submit" className="px-8">
+          <Button type="submit" className="px-8 rounded cursor-pointer bg-emerald-800 hover:bg-emerald-700 text-white">
             Add Masjid
           </Button>
         </div>

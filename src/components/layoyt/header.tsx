@@ -10,7 +10,7 @@ export default function Header() {
           Minar
         </Link>
         <Button
-          className="bg-yellow-300 text-black hover:bg-yellow-300/90"
+          className="bg-yellow-300 text-black hover:bg-yellow-300/90 rounded"
           asChild
         >
           <Link href="/add-masjid">Add Masjid</Link>
