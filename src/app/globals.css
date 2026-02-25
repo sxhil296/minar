@@ -1,15 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
-
-@theme {
-  --color-coffee-100: #d9caad;
-  --color-black: #000000;
-  --color-charcoal: #161616;
-  --color-gray: #98928b;
-  --color-error: #ff3333;
-}
 
 @theme inline {
   --color-background: var(--background);
@@ -49,6 +42,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
 :root {
